@@ -6,11 +6,7 @@
 $$\text{softmax}(x)=\text{softmax}(x+c)$$
 
 #### Answer:
-$$\text{softmax}(x+c)_i 
-=\frac{e^{x_i+c}}{\sum_{j=1}^n{e^{x_j+c}}}
-=\frac{e^{x_i} \cdot e^c}{e^c \cdot \sum_{j=1}^n{e^{x_j}}}
-=\frac{e^{x_i}}{\sum_{j=1}^n{e^{x_j}}}
-=\text{softmax(x)}_i$$
+$$\text{softmax}(x+c)_i=\frac{e^{x_i+c}}{\sum_{j=1}^n{e^{x_j+c}}}=\frac{e^{x_i} \cdot e^c}{e^c \cdot \sum_{j=1}^n{e^{x_j}}}=\frac{e^{x_i}}{\sum_{j=1}^n{e^{x_j}}}=\text{softmax(x)}_i$$
 
 ##  2 Neural Network Basics
 

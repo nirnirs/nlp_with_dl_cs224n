@@ -6,7 +6,11 @@
 $$\text{softmax}(x)=\text{softmax}(x+c)$$
 
 #### Answer:
-$$\text{softmax}(x+c)_i=\frac{e^{x_i+c}}{\sum_{j=1}^n{e^{x_j+c}}}=\frac{e^{x_i} \cdot e^c}{e^c \cdot \sum_{j=1}^n{e^{x_j}}}=\frac{e^{x_i}}{\sum_{j=1}^n{e^{x_j}}}=\text{softmax(x)}_i$$
+$$\text{softmax}(x+c)_i
+=\frac{e^{x_i+c}}{\sum _{j=1}^n{e^{x_j+c}}}
+=\frac{e^{x_i} \cdot e^c}{e^c \cdot \sum _{j=1}^n{e^{x_j}}}
+=\frac{e^{x_i}}{\sum _{j=1}^n{e^{x_j}}}
+=\text{softmax(x)}_i$$
 
 ##  2 Neural Network Basics
 
@@ -24,23 +28,23 @@ $$\text{sigmoid}'(x)
 
 #### Answer:
 $$\text{CE}(y,\hat y)
-=-\sum_i{y_i}\log{\hat {y_i}}
+=-\sum _i{y_i}\log{\hat {y_i}}
 =-\log{\hat {y_k}}
 =-\log({\text{softmax}(\theta)}_k)
-=\log\left(\frac{\sum_{i=1}^n{e^{\theta _j}}}{e^{\theta _k}}\right)
-=\log\left(\sum_{i=1}^n{e^{\theta _j}}\right) - \theta _k$$
+=\log\left(\frac{\sum _{i=1}^n{e^{\theta _j}}}{e^{\theta _k}}\right)
+=\log\left(\sum _{i=1}^n{e^{\theta _j}}\right) - \theta _k$$
 
 where $k$ is the index of the correct class. Then:
 
 $$\frac{\partial \text{CE}(y,\hat y)}{\partial \theta{_k}}
-=\frac{\partial}{\partial \theta{_k}} \left(\log\left(\sum_{j=1}^n{e^{\theta _j}}\right) - \theta _k \right)
-=\frac{e^{\theta _k}}{\sum_{j=1}^n{e^{\theta _j}}}-1
+=\frac{\partial}{\partial \theta{_k}} \left(\log\left(\sum _{j=1}^n{e^{\theta _j}}\right) - \theta _k \right)
+=\frac{e^{\theta _k}}{\sum _{j=1}^n{e^{\theta _j}}}-1
 =\hat y_k - 1
 $$
 
 $$\frac{\partial \text{CE}(y,\hat y)}{\partial \theta_{i \neq k }}
-=\frac{\partial}{\partial \theta_{i \neq k}} \left(\log\left(\sum_{j=1}^n{e^{\theta _j}}\right) - \theta _k \right)
-=\frac{e^{\theta _i}}{\sum_{j=1}^n{e^{\theta _j}}}
+=\frac{\partial}{\partial \theta_{i \neq k}} \left(\log\left(\sum _{j=1}^n{e^{\theta _j}}\right) - \theta _k \right)
+=\frac{e^{\theta _i}}{\sum _{j=1}^n{e^{\theta _j}}}
 =\hat y_i
 $$
 

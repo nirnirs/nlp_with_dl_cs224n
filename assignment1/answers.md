@@ -17,12 +17,12 @@ $$\text{softmax}(x+c)_i
 (a) Derive the gradient of the sigmoid function, and show that it can be rewritten as a function of the function value.
 
 #### Answer:
-$$\text{sigmoid}'(x) 
+$$\sigma'(x) 
 =\left(\frac{1}{1+e^{-x}}\right)'
 =-\frac{1}{(1+e^{-x})^2} \cdot -e^{-x}
 =\frac{e^{-x}}{(1+e^{-x})^2}
 =\frac{e^{-x}}{1+e^{-x}} \cdot (1 - \frac{e^{-x}}{1+e^{-x}} )
-=\text{sigmoid(x)} \cdot \left(1 - \text{sigmoid}(x) \right)$$
+=\sigma(x) \cdot \left(1 - \sigma(x) \right)$$
 
 (b) Derive the gradient with regard to the inputs of a softmax function when cross entropy loss is used for evaluation.
 

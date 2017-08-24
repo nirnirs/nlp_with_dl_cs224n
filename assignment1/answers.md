@@ -52,7 +52,7 @@ or, equivalently:
 $$\frac{\partial \text{CE}(y,\hat y)}{\partial \theta}=\hat y - y$$
 
 
-(c) Dervice the gradients with respect to the inputs x to an one-hidden-layer neural network.
+(c) Derive the gradients with respect to the inputs x to an one-hidden-layer neural network.
 
 Let: 
 $$z_1=xW_1+b_1$$
@@ -83,3 +83,5 @@ $$\frac{\partial{\mathrm{CE}(y, \hat y)}}{\partial{z_2}}  = \hat{y} - y$$
 and so:
 $$\frac{\partial{\mathrm{CE}(y, \hat y)}}{\partial{x}}
 =W_1 \circ \sigma'(z_1) \cdot W_2 \cdot (\hat{y}-y)^t$$
+
+Where $\circ$ means broadcasting.

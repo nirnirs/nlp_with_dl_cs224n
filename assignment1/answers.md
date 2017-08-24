@@ -85,3 +85,8 @@ $$\frac{\partial{\mathrm{CE}(y, \hat y)}}{\partial{x}}
 =W_1 \circ \sigma'(z_1) \cdot W_2 \cdot (\hat{y}-y)^t$$
 
 Where $\circ$ means broadcasting.
+
+(d) How many parameters are there in this neural network, assuming the input is $D_x$-dimensional, the output is $D_y$-dimensional, and there are $H$ hidden units?
+
+$W_1$ is of size $D_x \cdot H$, and $W_2$ is of size $H \cdot D_y$ so the total number of parameters in the network is:
+$$W_1 + W_2 = D_x \cdot H +  H \cdot D_y = H \cdot (D_x + D_y)$$

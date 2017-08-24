@@ -50,3 +50,36 @@ $$
 
 or, equivalently:
 $$\frac{\partial \text{CE}(y,\hat y)}{\partial \theta}=\hat y - y$$
+
+
+(c) Dervice the gradients with respect to the inputs x to an one-hidden-layer neural network.
+
+Let: 
+$$z_1=xW_1+b_1$$
+$$z_2=hW_2+b_2$$
+
+Then:
+$$h=\sigma(z_1)$$
+$$\hat{y}=\mathrm{softmax}(z_2)$$
+
+The gradient with respect to $x$ is:
+$$\frac{\partial{\mathrm{CE}(y, \hat y)}}{\partial{x}}
+=\frac{\partial{z_1}}{\partial{x}}
+\cdot \frac{\partial{h}}{\partial{z_1}}
+\cdot \frac{\partial{z_2}}{\partial{h}}
+\cdot \frac{\partial{\mathrm{CE}(y, \hat y)}}{\partial{z_2}}
+$$
+
+where:
+
+$$\frac{\partial{z_1}}{\partial{x}} = W_1$$
+
+$$\frac{\partial{h}}{\partial{z_1}} = \sigma'(z_1)$$
+
+$$\frac{\partial{z_2}}{\partial{h}} = W_2$$
+
+$$\frac{\partial{\mathrm{CE}(y, \hat y)}}{\partial{z_2}}  = \hat{y} - y$$
+
+and so:
+$$\frac{\partial{\mathrm{CE}(y, \hat y)}}{\partial{x}}
+=W_1 \circ \sigma'(z_1) \cdot W_2 \cdot (\hat{y}-y)^t$$

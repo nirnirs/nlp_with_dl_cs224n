@@ -83,7 +83,7 @@ $$\frac{\partial{\mathrm{CE}(y, \hat y)}}{\partial{z_2}}  = \hat{y} - y$$
 and so:
 
 $$\frac{\partial{\mathrm{CE}(y, \hat y)}}{\partial{x}}
-=(\hat{y}-y) \cdot W_2^t \cdot \sigma'(z_1) \circ W_1^t $$
+=(\hat{y}-y) \cdot W_2^T \cdot \sigma'(z_1) \circ W_1^T $$
 
 Where $\circ$ means broadcasting.
 
@@ -91,3 +91,21 @@ Where $\circ$ means broadcasting.
 
 $W_1$ is of size $D_x \cdot H$, and $W_2$ is of size $H \cdot D_y$ so the total number of parameters in the network is:
 $$W_1 + W_2 = D_x \cdot H +  H \cdot D_y = H \cdot (D_x + D_y)$$
+
+##  3 word2vec
+
+(a) Derive the gradients of a word2vec skipgram with respect to $v_c$.
+
+#### Answer:
+$$\frac{ \partial{CE(y, \hat{y})}}{ \partial{v_c}}
+=\frac{ \partial{CE(y, \hat{y})}}{ \partial{v_cU}}
+\cdot \frac{ \partial{v_cU}}{\partial{v_c}}
+= (\hat y - y) \cdot U^T$$
+
+(b) Derive the gradients of a word2vec skipgram with respect to $u_w$.
+
+#### Answer:
+$$\frac{ \partial{CE(y, \hat{y})}}{ \partial{v_c}}
+=\frac{ \partial{CE(y, \hat{y})}}{ \partial{v_cU}}
+\cdot \frac{ \partial{v_cU}}{\partial{U}}
+=v_c^T \cdot (\hat y - y)$$

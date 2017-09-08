@@ -81,8 +81,9 @@ $$\frac{\partial{z_2}}{\partial{h}} = W_2$$
 $$\frac{\partial{\mathrm{CE}(y, \hat y)}}{\partial{z_2}}  = \hat{y} - y$$
 
 and so:
+
 $$\frac{\partial{\mathrm{CE}(y, \hat y)}}{\partial{x}}
-=W_1 \circ \sigma'(z_1) \cdot W_2 \cdot (\hat{y}-y)^t$$
+=(\hat{y}-y) \cdot W_2^t \cdot \sigma'(z_1) \circ W_1^t $$
 
 Where $\circ$ means broadcasting.
 

@@ -94,7 +94,7 @@ $$W_1 + W_2 = D_x \cdot H +  H \cdot D_y = H \cdot (D_x + D_y)$$
 
 ##  3 word2vec
 
-(a) Derive the gradients of a word2vec skipgram with respect to $v_c$.
+(a) Derive the gradients of a word2vec skipgram with softmax-crossentropy cost with respect to $v_c$.
 
 #### Answer:
 $$\frac{ \partial{CE(y, \hat{y})}}{ \partial{v_c}}
@@ -102,10 +102,60 @@ $$\frac{ \partial{CE(y, \hat{y})}}{ \partial{v_c}}
 \cdot \frac{ \partial{v_cU}}{\partial{v_c}}
 = (\hat y - y) \cdot U^T$$
 
-(b) Derive the gradients of a word2vec skipgram with respect to $u_w$.
+(b) Derive the gradients of a word2vec skipgram with softmax-cross entropy cost with respect to $u_w$.
 
 #### Answer:
-$$\frac{ \partial{CE(y, \hat{y})}}{ \partial{v_c}}
+$$\frac{ \partial{CE(y, \hat{y})}}{ \partial{U}}
 =\frac{ \partial{CE(y, \hat{y})}}{ \partial{v_cU}}
 \cdot \frac{ \partial{v_cU}}{\partial{U}}
 =v_c^T \cdot (\hat y - y)$$
+
+(c) Repeat parts (a) and (b) assuming we are using the negative sampling loss for the predicted vector $v_c$, and the expected output word is $o$.
+
+#### Answer:
+
+Define:
+$$\mathrm{z}(u, v)=-\log(\sigma(u^Tv))$$
+
+$\sigma(uv)$ will be close to 1 when $u$ and $v$ point in the same direction, and closer to 0 when $u$ and $v$ point in different directions.
+$-\log\sigma(uv)$ will be higher when $u$ and $v$ point in different directions. So basically $\mathrm{z(u,v)}$ is asort of dissimilarity metric,
+and so the cost is high when the output vector is not similar to the center vector, and when the center vector is similar to the negative sampled vectors.
+
+
+$$\frac{\partial{\mathrm{z}(u, v)}}{\partial{v}})
+=\frac{\partial{-\log\left(\sigma(u^Tv)\right)}}{\partial{v}}
+=-\frac{1}{\sigma(u^Tv)} \cdot \sigma(u^Tv) \cdot \left(1 - \sigma(u^Tv)\right) \cdot u^T
+=\left(1 - \sigma(u^Tv)\right) \cdot -u^T$$
+
+Which basically means that in order to increase the dissimilarity we need to move $v$ in the opposite direction of $u$.
+
+The gradient of $J$ with respect to $v_c$ is then:
+
+$$\frac{ \partial{J(o,v_c,U)}}{\partial{v_c}}
+=\frac{\partial}{\partial{v_c}} \left( \mathrm{z(u_o, v_c)} 
++\sum_{k=1}^K{\mathrm{z}(-u_k,v_c)}\right)
+=\left(1 - \sigma(u_o^Tv_c) \right) \cdot -u_o^T
++\sum_{k=1}^K{\left(1 - \sigma(-u_k^Tv_c)\right) \cdot u_k^T}$$
+
+Which basically means that in order to increase the cost, we need to move $v_c$ in the opposite direction of $u_o$ and in the same direction as $u_k$.
+
+The gradient of $J$ with respect to $u_o$ is then:
+
+$$\frac{ \partial{J(o,v_c,U)}}{\partial{u_o}}
+=\frac{\partial}{\partial{u_o}} \left( \mathrm{z(u_o, v_c)}
++\sum_{k=1}^K{\mathrm{z}(-u_k,v_c)}\right)
+=\left(1 - \sigma(u_o^Tv_c) \right) \cdot -v_c^T$$
+
+Which basically means that the gradient of $J$ with respect to $u_o$ points in the opposite direction of $v_c$.
+
+The gradient of $J$ with respect to $u_{w \in {1..k}}$ is then:
+
+$$\frac{ \partial{J(o,v_c,U)}}{\partial{u_w}}
+=\frac{\partial}{\partial{u_w}} \left( \mathrm{z(u_o, v_c)} 
++\sum_{k=1}^K{\mathrm{z}(-u_k,v_c)}\right)
+=\left(1 - \sigma(-u_w^Tv_c)\right) \cdot v_c^T$$
+
+Which basically means that the gradient of $J$ with respect to $u_w$ points in the same direction of $v_c$.
+
+To compute the softmax-CE error, we need to compute the denominator of the softmax which requires to perform W dot products for the softmax denominator.
+To compute the negative-sample error, we only need to perform K dot products. So the ratio is W/K.
